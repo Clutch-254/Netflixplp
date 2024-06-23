@@ -1,0 +1,67 @@
+1999 and 1994 had two movies released in the same years
+One difficulty I faced was that the movies were'nt cartegorized not allowing for a wider variety of data manipulation
+mysql> Describe MovieGenres;
+
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| movie_id | int  | NO   | PRI | NULL    |       |
+| genre_id | int  | NO   | PRI | NULL    |       |
++----------+------+------+-----+---------+-------+
+mysql> Describe Genres;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| genre_id | int         | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(50) | NO   | UNI | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+
+A fact Christopher Nolan directed two movies that being; The Knight in 2008 and Inception in 2010
+I rearranged the movies by release year in descending order as shown below:
+mysql> select * from Movies order by release_year desc;
++----------+--------------------------+--------------+----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| movie_id | title                    | release_year | director             | description                                                                                                                                                                                      |
++----------+--------------------------+--------------+----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|       12 | Parasite                 |         2019 | Bong Joon-ho         | All unemployed, the members of the Kim family take peculiar interest in the wealthy Park family. The son Ki-woo gets hired as an English tutor for the Parks                                     |
+|       11 | Inception                |         2010 | Christopher Nolan    | A professional thief who steals corporate secrets through use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.                                |
+|        9 | The Dark Knight          |         2008 | Christopher Nolan    | When Batman takes on a mysterious criminal mastermind known as the Joker.                                                                                                                        |
+|       13 | Spirited Away            |         2001 | Hayao Miyazaki       | A sullen ten-year-old girl named Chihiro Ogino finds herself in the world of spirits. After her parents are transformed into pigs by the witch Yubaba, Chihiro takes on a job working in Yubaba. |
+|        1 | Fight Club               |         1999 | David Fincher        | An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into something much, much more.                                                           |
+|        2 | The Matrix               |         1999 | The Wachowskis       | When a computer hacker learns the shocking truth about reality, he joins a rebellion against the machines which digitally enslave humanity.                                                      |
+|        5 | The Big Lebowski         |         1998 | Joel Coen            | Jeffrey "The Dude" Lebowski, a carefree Los Angeles slacker with a penchant for White Russians, is mistaken for a millionaire by thugs working for a debt-collector.                             |
+|        7 | The Shawshank Redemption |         1994 | Frank Darabont       | A timeless story of hope and redemption in a Maine prison.                                                                                                                                       |
+|       10 | Pulp Fiction             |         1994 | Quentin Tarantino    | A Tarantino classic, weaving crime stories through non-chronological order.                                                                                                                      |
+|        3 | Schindlers List          |         1993 | Steven Spielberg     | The true story of Oskar Schindler, a German businessman who saved the lives of over a thousand Jews during the Holocaust.                                                                        |
+|        6 | Blade Runner             |         1982 | Ridley Scott         | A blade runner, a retired police officer who hunts rogue replicants (artificial humans), is tasked with retiring a new group of replicants who have illegally come to Earth.                     |
+|        8 | The Godfather            |         1972 | Francis Ford Coppola | The story of the Corleone family under patriarch Vito Corleone                                                                                                                                   |
+|        4 | 12 Angry Men             |         1957 | Sidney Lumet         | A jury deliberates the fate of a young man accused of murdering his father in this classic courtroom drama.                                                                                      |
++----------+--------------------------+--------------+----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Questions formulated:
+Did any year have more than one movies? Yes, 1999 had two movies as shown below
+mysql> select * from Movies where release_year = "1999";
++----------+------------+--------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| movie_id | title      | release_year | director       | description                                                                                                                                 |
++----------+------------+--------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+|        1 | Fight Club |         1999 | David Fincher  | An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into something much, much more.      |
+|        2 | The Matrix |         1999 | The Wachowskis | When a computer hacker learns the shocking truth about reality, he joins a rebellion against the machines which digitally enslave humanity. |
++----------+------------+--------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+Which movie is the earliest and which is the latest to be released? 12 Angry men is the earliest at 1957 and spirited Parasite is the latest released in 2019
+mysql> select * from Movies order by release_year desc;
++----------+--------------------------+--------------+----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| movie_id | title                    | release_year | director             | description                                                                                                                                                                                      |
++----------+--------------------------+--------------+----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|       12 | Parasite                 |         2019 | Bong Joon-ho         | All unemployed, the members of the Kim family take peculiar interest in the wealthy Park family. The son Ki-woo gets hired as an English tutor for the Parks                                     |
+|       11 | Inception                |         2010 | Christopher Nolan    | A professional thief who steals corporate secrets through use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.                                |
+|        9 | The Dark Knight          |         2008 | Christopher Nolan    | When Batman takes on a mysterious criminal mastermind known as the Joker.                                                                                                                        |
+|       13 | Spirited Away            |         2001 | Hayao Miyazaki       | A sullen ten-year-old girl named Chihiro Ogino finds herself in the world of spirits. After her parents are transformed into pigs by the witch Yubaba, Chihiro takes on a job working in Yubaba. |
+|        1 | Fight Club               |         1999 | David Fincher        | An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into something much, much more.                                                           |
+|        2 | The Matrix               |         1999 | The Wachowskis       | When a computer hacker learns the shocking truth about reality, he joins a rebellion against the machines which digitally enslave humanity.                                                      |
+|        5 | The Big Lebowski         |         1998 | Joel Coen            | Jeffrey "The Dude" Lebowski, a carefree Los Angeles slacker with a penchant for White Russians, is mistaken for a millionaire by thugs working for a debt-collector.                             |
+|        7 | The Shawshank Redemption |         1994 | Frank Darabont       | A timeless story of hope and redemption in a Maine prison.                                                                                                                                       |
+|       10 | Pulp Fiction             |         1994 | Quentin Tarantino    | A Tarantino classic, weaving crime stories through non-chronological order.                                                                                                                      |
+|        3 | Schindlers List          |         1993 | Steven Spielberg     | The true story of Oskar Schindler, a German businessman who saved the lives of over a thousand Jews during the Holocaust.                                                                        |
+|        6 | Blade Runner             |         1982 | Ridley Scott         | A blade runner, a retired police officer who hunts rogue replicants (artificial humans), is tasked with retiring a new group of replicants who have illegally come to Earth.                     |
+|        8 | The Godfather            |         1972 | Francis Ford Coppola | The story of the Corleone family under patriarch Vito Corleone                                                                                                                                   |
+|        4 | 12 Angry Men             |         1957 | Sidney Lumet         | A jury deliberates the fate of a young man accused of murdering his father in this classic courtroom drama.                                                                                      |
++----------+--------------------------+--------------+----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
